@@ -34,9 +34,9 @@ In addition, the files used for the simulation of each of the scenarios using Py
     -   Interest Output:
         - Outcome folder contains:
             - logCWND.log: [time | size (MSS)]
-            - RXFile.log: [num pkt | time | size pkt(B)]
-            - TXFile.log: [num pkt | time | size pkt(B)]
-            - logBuffer.log: [time | size buffer(B)]
+            - RXFile.log: [num pkt | time | size pkt (B)]
+            - TXFile.log: [num pkt | time | size pkt (B)]
+            - logBuffer.log: [time | size buffer (B)]
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
             - ChannelVar_stop.log: [time | State] where State = {Work=1,Stop}
 ### LEO based scenarios: LMS 
@@ -46,9 +46,9 @@ In addition, the files used for the simulation of each of the scenarios using Py
     -   Interest Output:
         - Outcome folder:
             - logCWND.log: [time | size (MSS)]
-            - RXFile.log: [num pkt | time | size pkt(B)]
-            - TXFile.log: [num pkt | time | size pkt(B)]
-            - logBuffer.log: [time | size buffer(B)]
+            - RXFile.log: [num pkt | time | size pkt (B)]
+            - TXFile.log: [num pkt | time | size pkt (B)]
+            - logBuffer.log: [time | size buffer (B)]
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
            
 ### LEO based scenarios: LMS - Background traffic - LMS
@@ -59,9 +59,9 @@ In addition, the files used for the simulation of each of the scenarios using Py
         - Outcome folder - sweep configuration contains:
             - SIM [#] folder:
                 - logCWND.log: [time | size (MSS)]
-                - RXFile.log: [num pkt | time | size pkt(B)]
-                - TXFile.log: [num pkt | time | size pkt(B)]
-                - logBuffer.log: [time | size buffer(B)]
+                - RXFile.log: [num pkt | time | size pkt (B)]
+                - TXFile.log: [num pkt | time | size pkt (B)]
+                - logBuffer.log: [time | size buffer (B)]
                 - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
                
 
@@ -73,9 +73,9 @@ In addition, the files used for the simulation of each of the scenarios using Py
         - Outcome folder - sweep configuration contains:
             - SIM [#] folder:
                 - logCWND.log: [time | size (MSS)]
-                - RXFile.log: [num pkt | time | size pkt(B)]
-                - TXFile.log: [num pkt | time | size pkt(B)]
-                - logBuffer.log: [time | size buffer(B)]
+                - RXFile.log: [num pkt | time | size pkt (B)]
+                - TXFile.log: [num pkt | time | size pkt (B)]
+                - logBuffer.log: [time | size buffer (B)]
                 - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
               
 ### Applciations with ns-3 TAP
@@ -85,9 +85,9 @@ In addition, the files used for the simulation of each of the scenarios using Py
     -   Interest Output:
         - Outcome folder contains:
             - logCWND.log: [time | size (MSS)]
-            - RXFile.log: [num pkt | time | size pkt(B)]
-            - TXFile.log: [num pkt | time | size pkt(B)]
-            - logBuffer.log: [time | size buffer(B)]
+            - RXFile.log: [num pkt | time | size pkt (B)]
+            - TXFile.log: [num pkt | time | size pkt (B)]
+            - logBuffer.log: [time | size buffer (B)]
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
 
 ## Usage

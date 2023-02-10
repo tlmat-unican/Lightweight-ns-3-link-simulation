@@ -85,7 +85,7 @@ def main():
           cmd = 'mkdir ./{}/BackTrafficv2/{}/{}/'.format(OutcomeFolder,Sim_name,sim)
           os.system(cmd)
           if Sim_name!="":
-            Config_Out="--out-folder-path={}".format("../../ns3_sim/{Outcomefolder}/BackTrafficv2/" + Sim_name + "/"+ str(sim) + "/") 
+            Config_Out="--out-folder-path={}".format("../../scripts/{}/BackTrafficv2/" + Sim_name + "/"+ str(sim) + "/".format(OutcomeFolder)) 
           RunNs3(ns3Path, ns3ScenarioC, ConfigPath, Config_Out, Config_Model)
 
       # StopNs3(ns3ScenarioC)

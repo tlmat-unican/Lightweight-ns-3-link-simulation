@@ -1,0 +1,16 @@
+{
+    "NumLinks": 1,
+    "Links": [
+        {
+            "Link-type": "LMS",
+            "Band": "Ka_truqui_5sec",
+            "DataRate": 60,
+            "Delay": 10,
+            "ErrorRate": 0,
+            "Mode": "OTROS",
+            "MTU": 1460,
+            "DropTailQueue": 30000,
+            "Background": false
+        }
+    ]
+}

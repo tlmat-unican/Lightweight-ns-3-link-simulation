@@ -1,0 +1,40 @@
+{
+  "NumLinks": 3,
+  "Links": [
+      {
+          "Link-type": "LMS",
+          "Band": "Ka",
+          "DataRate": 3,
+          "Delay": 0,
+          "ErrorRate": 0,
+          "Mode": "OTROS",
+          "MTU": 1460,
+          "DropTailQueue": 0,
+          "Background": false
+      },
+
+      {
+        "Link-type": "Disconnection",
+        "Band": "I",
+        "DataRate": 50,
+        "Delay": 10,
+        "ErrorRate": 0,
+        "Mode": "OTROS",
+        "MTU": 1460,
+        "DropTailQueue": 0,
+        "Background": false
+      },
+      
+      {
+        "Link-type": "LMS",
+        "Band": "Ka",
+        "DataRate": 3,
+        "Delay": 0,
+        "ErrorRate": 0,
+        "Mode": "OTROS",
+        "MTU": 1460,
+        "DropTailQueue": 0,
+        "Background": false
+    }
+  ]
+}

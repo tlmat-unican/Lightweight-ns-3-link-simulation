@@ -8,7 +8,7 @@
 ## Dependecies 
 It has been tested in _Ubuntu 22.04.1 LTS (jammy)_. It has the following dependencies:
 
-- _python3_, _pip3_, _brctl_, _tunctl_, _ip_ (should be there, just in case)
+- _python3_, _pip3_, _brctl_, _tunctl_, _ip_ (should be there, just in case of using real hosts)
 
 ```
 apt install python3

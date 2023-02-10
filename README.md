@@ -7,8 +7,6 @@
 
 ## Scenarios
 
-
-
 ### Simple model: LMS TOY
 - Use python script sim_ns3_lms_toy.py
     -   Requires:

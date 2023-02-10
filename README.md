@@ -5,7 +5,23 @@
 - Install ns3: https://www.nsnam.org/wiki/Installation
 - Intsall Jupyter: https://jupyter.org/install 
 
+## Dependecies 
+It has been tested in _Ubuntu 22.04.1 LTS (jammy)_. It has the following dependencies:
+
+- _python3_, _pip3_, _brctl_, _tunctl_, _ip_ (should be there, just in case)
+
+```
+apt install python3
+apt install python3-pip
+apt install bridge-utils
+apt install uml-utilities
+apt install iproute2
+```
+
 ## Scenarios
+Below are the scripts that have been used to prepare the results of [PAPER], also, as mentioned, a version is included where the necessary Tap Briges are added to be able to emulate real hosts.
+
+In addition, the files used for the simulation of each of the scenarios using Python3 are described.
 
 ### Simple model: LMS TOY
 - Use python script sim_ns3_lms_toy.py
@@ -30,7 +46,7 @@
             - TXFile.log: [num pkt | time | size pkt(B)]
             - logBuffer.log: [time | size buffer(B)]
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
-            - ChannelVar_stop.log: [time | State] where State = {Work=1,Stop}
+           
 ### LEO based scenarios: LMS - Background traffic - LMS
 - Use python script sim_ns3_sims_stop.py
     -   Requires:
@@ -43,8 +59,7 @@
                 - TXFile.log: [num pkt | time | size pkt(B)]
                 - logBuffer.log: [time | size buffer(B)]
                 - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
-                - ChannelVar_stop.log: [time | State] where State = {Work=1,Stop}
-
+               
 
 ### LEO based scenarios: LMS - Interrupted Channel - LMS
 - Use python script sim_ns3_sims_back.py
@@ -58,8 +73,7 @@
                 - TXFile.log: [num pkt | time | size pkt(B)]
                 - logBuffer.log: [time | size buffer(B)]
                 - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
-                - ChannelVar_stop.log: [time | State] where State = {Work=1,Stop}
-
+              
 ### Applciations with ns-3 TAP
 - Use python script sim_ns3_taps.py
     -   Requires:
@@ -71,8 +85,15 @@
             - TXFile.log: [num pkt | time | size pkt(B)]
             - logBuffer.log: [time | size buffer(B)]
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
-            - ChannelVar_stop.log: [time | State] where State = {Work=1,Stop}
 
+## Usage
+
+To run network the the _<--name-->.py_ file:
+
+```shell
+python3 <--name-->.py
+```
+           
 ## Contact 
 
 * [Fátima Khan Blanco (khanf@unican.es)](mailto:khanf@unican.es)

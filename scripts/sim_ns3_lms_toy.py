@@ -21,7 +21,7 @@ if ConfigPath!="":
     ConfigPathStr="--json-path={}".format(ConfigPath)
 
 if Sim_name!="":
-    Config_Out="--out-folder-path={}".format("../../ns3_sim/" + Sim_name+ "/") 
+    Config_Out="--out-folder-path={}".format("../../scripts/" + Sim_name+ "/") 
 
 if Transport_model!="":
     Config_Model="--tcp-model={}".format(Transport_model) 

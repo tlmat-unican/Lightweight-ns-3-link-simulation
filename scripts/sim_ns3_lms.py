@@ -2,8 +2,6 @@ import os
 import time 
 import subprocess
 
-
-
 ## Global Params
 
 ns3ScenarioC = 'scratch/p2p_scenarioOnBuild'

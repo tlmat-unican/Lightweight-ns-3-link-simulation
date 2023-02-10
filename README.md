@@ -4,7 +4,9 @@
 - Intsall [Python3](https://www.python.org/downloads/) 
 - Install [ns-3](https://www.nsnam.org/wiki/Installation)
 - Intsall [Jupyter](https://jupyter.org/install) 
-
+## Project Structure
+- Two scenarios are included in folder _scratch_, it has been tested for _ns3.35_.  One of them icludes tap-bridges.
+- Folder _scripts_ contains every script that is necessary to run each topology.
 ## Dependecies 
 It has been tested in _Ubuntu 22.04.1 LTS (jammy)_. It has the following dependencies:
 
@@ -24,7 +26,7 @@ Below are the scripts that have been used to prepare the results of [PAPER], als
 In addition, the files used for the simulation of each of the scenarios using Python3 are described.
 
 ### Simple model: LMS TOY
-- Use python script sim_ns3_lms_toy.py
+- Use python script _sim_ns3_lms_toy.py_
     -   Requires:
         - lms_toy.json [Location: Scratch folder inside ns3-35 folder]
     -   Interest Output:
@@ -36,7 +38,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
             - ChannelVar_stop.log: [time | State] where State = {Work=1,Stop}
 ### LEO based scenarios: LMS 
-- Use python script sim_ns3_lms.py
+- Use python script _sim_ns3_lms.py_
     -   Requires:
         - lms.json [Location: Scratch folder inside ns3-35 folder]
     -   Interest Output:
@@ -48,7 +50,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
            
 ### LEO based scenarios: LMS - Background traffic - LMS
-- Use python script sim_ns3_sims_stop.py
+- Use python script _sim_ns3_sims_stop.py_
     -   Requires:
         - ConfigScenario_back_template.json [Location: Scratch folder inside ns3-35 folder]
     -   Interest Output:
@@ -62,7 +64,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
                
 
 ### LEO based scenarios: LMS - Interrupted Channel - LMS
-- Use python script sim_ns3_sims_back.py
+- Use python script _sim_ns3_sims_background_traffic.py_
     -   Requires:
         - ConfigScenario_back_template.json [Location: Scratch folder inside ns3-35 folder]
     -   Interest Output:
@@ -75,7 +77,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
                 - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
               
 ### Applciations with ns-3 TAP
-- Use python script sim_ns3_taps.py
+- Use python script _sim_ns3_taps.py_
     -   Requires:
         - lms_toy.json [Location: Scratch folder inside ns3-35 folder]
     -   Interest Output:

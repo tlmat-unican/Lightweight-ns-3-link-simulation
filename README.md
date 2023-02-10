@@ -1,9 +1,9 @@
 # Tittle : [Name of the Paper]
 ## Usage requirements
 
-- Intsall Python3: https://www.python.org/downloads/
-- Install ns3: https://www.nsnam.org/wiki/Installation
-- Intsall Jupyter: https://jupyter.org/install 
+- Intsall [Python3](https://www.python.org/downloads/) 
+- Install [ns-3](https://www.nsnam.org/wiki/Installation)
+- Intsall [Jupyter](https://jupyter.org/install) 
 
 ## Dependecies 
 It has been tested in _Ubuntu 22.04.1 LTS (jammy)_. It has the following dependencies:

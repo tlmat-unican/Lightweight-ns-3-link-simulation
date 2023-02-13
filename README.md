@@ -102,6 +102,8 @@ In addition, the files used for the simulation of each of the scenarios using Py
             - logBuffer.log: [time | size buffer (B)]
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
 
+## Outcomes - display
+In folder [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/), there is a Jupyter notebook, drawing the perfomance evolution from the result folders.
 ## Usage
 
 To run a network topology the _<--name-->.py_ file:

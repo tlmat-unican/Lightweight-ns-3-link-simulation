@@ -5,7 +5,7 @@
 - Install [ns-3](https://www.nsnam.org/wiki/Installation)
 - Intsall [Jupyter](https://jupyter.org/install) 
 ## Project Structure
-- Two scenarios are included in folder _scratch_, it has been tested for _ns3.35_.  One of them icludes tap-bridges.
+- Two scenarios are included in folder [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/), it has been tested for _ns3.35_.  One of them icludes tap-bridges.
 - Folder _scripts_ contains every script that is necessary to run each topology.
 ## Dependecies 
 It has been tested in _Ubuntu 22.04.1 LTS (jammy)_. It has the following dependencies:
@@ -78,7 +78,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
                 - logBuffer.log: [time | size buffer (B)]
                 - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
               
-### Applciations with ns-3 TAP
+### Applications with ns-3 TAP
 - Use python script _sim_ns3_taps.py_
     -   Requires:
         - lms_toy.json [Location: Scratch folder inside ns3-35 folder]

@@ -15,7 +15,7 @@ It has been tested in `Ubuntu 22.04.1 LTS` _(jammy)_. It has the following depen
 apt install python3
 apt install python3-pip
 ```
--  _brctl_, _tunctl_, _ip_ (should be there, just in case of using real hosts) You need to install the following packages for easy bridge management.
+-  _brctl_, _tunctl_, _ip_ (should be there, just in case of using real hosts). You need to install the following packages for easy bridge management.
 ```
 apt install bridge-utils
 apt install uml-utilities
@@ -104,7 +104,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
 
 ## Usage
 
-To run network the _<--name-->.py_ file:
+To run a network topology the _<--name-->.py_ file:
 
 ```shell
 python3 <--name-->.py

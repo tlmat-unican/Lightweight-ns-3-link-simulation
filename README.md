@@ -15,11 +15,20 @@ It has been tested in `Ubuntu 22.04.1 LTS` _(jammy)_. It has the following depen
 apt install python3
 apt install python3-pip
 ```
--  _brctl_, _tunctl_, _ip_ (should be there, just in case of using real hosts)
+-  _brctl_, _tunctl_, _ip_ (should be there, just in case of using real hosts) You need to install the following packages for easy bridge management.
 ```
 apt install bridge-utils
 apt install uml-utilities
 apt install iproute2
+```
+- Running NS3 optimized
+```
+# first we clean all the compile options
+./waf distclean
+# we configure the compile options as optimized, disable examples, tests, python integration and static.
+./waf configure --disable-python --disable-tests --disable-examples --build-profile=optimized
+# we recompile (this might take some time)
+./waf
 ```
 
 ## Event - Driver - Simulator - Utilities

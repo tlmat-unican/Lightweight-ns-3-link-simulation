@@ -6,9 +6,9 @@
 - Intsall [Jupyter](https://jupyter.org/install) 
 ## Project Structure
 - Two scenarios are included in folder [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/), it has been tested for _ns-3.35_.  One of them includes tap-bridges.
-- Folder [_scripts_](./scripts/) contains every script that is necessary to run each topology.
+- Folder [_scripts_](./scripts/) contains every script needed to run each topology, shown in the paper. It also contains Jupyter notebooks to represent the outcomes.
 ## Dependecies 
-It has been tested in _Ubuntu 22.04.1 LTS (jammy)_. It has the following dependencies:
+It has been tested in `Ubuntu 22.04.1 LTS (jammy)`. It has the following dependencies:
 
 - _python3_, _pip3_,
 ```

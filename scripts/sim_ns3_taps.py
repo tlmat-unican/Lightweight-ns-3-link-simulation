@@ -1,3 +1,10 @@
+''' 
+This script is used to deploy the tap - scenario with a LMS-toy topology.
+'''
+
+
+
+
 import os
 import time 
 import subprocess
@@ -5,13 +12,12 @@ import subprocess
 
 
 ## Global Params
-
 ns3ScenarioC = 'scratch/p2p_scenarioReusable_taps'
-# ns3ScenarioC = 'scratch/tap-lms'
 ns3Path = '../ns-allinone-3.35/ns-3.35'
-
 ConfigPath = "/scratch/lms_toy.json"
 OutcomeFolder = "OUTCOMES/"
+
+# Creating outcome folder if it doesn't exit
 os.system('mkdir ./{}'.format(OutcomeFolder))
 
 Transport_model = "Cubic"
@@ -31,7 +37,7 @@ cmd = 'mkdir ./{}/'.format(Sim_name)
 os.system(cmd)
 
 
-
+# To remove tap and bringing interfaces down 
 def DetachAndRemoveTaps ():
   '''
   Clear setup related to taps

@@ -1,13 +1,21 @@
+''' 
+Script to analyse the variation in stop state. Modify Nsim to adjust the number of simulations.
+'''
+
+
+
+
 import os
 import numpy as np
 
-ns3ScenarioD = 'p2p_scenarioOnBuild'
+
+
+## Global Params
 ns3ScenarioC = 'scratch/p2p_scenarioOnBuild'
 ns3Path = '../ns-allinone-3.35/ns-3.35'
-
 ConfigPath = "/scratch/ConfigScenario_stop.json"
 Outcomefolder= "OUTCOMES"
-Nsim = 1
+Nsim = 1 ## To set the number of simulations from each scenario
 
 Transport_model = "Cubic"
 

@@ -7,10 +7,6 @@ import subprocess
 
 
 
-
-
-
-ns3ScenarioD = 'p2p_scenarioOnBuild'
 ns3ScenarioC = 'scratch/p2p_scenarioOnBuild'
 # ns3ScenarioC = 'scratch/tap-lms'
 ns3Path = '../ns-allinone-3.35/ns-3.35'

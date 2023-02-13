@@ -22,6 +22,9 @@ apt install uml-utilities
 apt install iproute2
 ```
 
+## Event - Driver - Simulator - Utilities
+As mentioned above, [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/) folder contains the scenarios. Besides, it includes the needed utilities to deploy a topology and the skills to mimic a variant channel. 
+
 ## Scenarios
 Below are the scripts that have been used to prepare the results of [PAPER], also, as mentioned, a version is included where the necessary Tap Briges are added to be able to mimic real hosts.
 

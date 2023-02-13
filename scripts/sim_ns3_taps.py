@@ -21,7 +21,7 @@ OutcomeFolder = "OUTCOMES/"
 os.system('mkdir ./{}'.format(OutcomeFolder))
 
 Transport_model = "Cubic"
-Sim_name = "{}{}_finito_MedioBDPConfigScenario_LMStoy_taps".format(OutcomeFolder,Transport_model)
+Sim_name = "{}{}LMStoy_taps".format(OutcomeFolder,Transport_model)
 
 if ConfigPath!="":
     ConfigPathStr="--json-path={}".format(ConfigPath)
@@ -75,10 +75,10 @@ def StopNs3 (scenario) :
 
 def main():
     DetachAndRemoveTaps()
-    # print("Start sim")
+    print("Start sim")
     RunNs3(ns3Path, ns3ScenarioC, ConfigPath, Config_Out, Config_Model)
 
-    # StopNs3(ns3ScenarioC)
+
 
 if __name__ == '__main__':
   main()

@@ -8,20 +8,16 @@ import json
 import subprocess
 
 
-
+# Global Params
 ns3ScenarioC = 'scratch/p2p_scenarioOnBuild'
-# ns3ScenarioC = 'scratch/tap-lms'
 ns3Path = '../ns-allinone-3.35/ns-3.35'
-
 ConfigPath = "/scratch/ConfigScenario.json"
-
 Nsim = 1
 sim_rate = 0
 Transport_model = "Cubic"
-Simulation_name = "Backtraffic"
-
-
 OutcomeFolder = "OUTCOMES"
+
+
 
 
 

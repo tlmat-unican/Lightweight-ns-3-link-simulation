@@ -131,19 +131,21 @@ int main(int argc, char *argv[])
   string JSONpath = "";
   double timevalue = 0;
   double duration = 60;
+  double app_rate = 40; 
+  double file_size = 300e6;
   string name = "";
   string cwnd_value = "Cubic";
   string outcome_folder = "";
   int run = 1;
-  std::ofstream logFile;
-  logFile.open("logLMS.log");
- 
+
   CommandLine cmd(__FILE__);
   cmd.AddValue("json-path", "Configuration file name", JSONpath);
   cmd.AddValue("tracing-name", "Tracing file name id", name);
   cmd.AddValue("tcp-model", "To select Reno model", cwnd_value);
   cmd.AddValue("stop-time", "Select stop time", timevalue);
   cmd.AddValue("out-folder-path", "Location of the outcome folder", outcome_folder);
+  cmd.AddValue("app-rate", "Select app-rate", app_rate);
+  cmd.AddValue("file-size-bytes", "Select file-size", file_size);
   cmd.AddValue("time","Simulation Time",duration);
   cmd.AddValue("run", "", run);
   cmd.Parse(argc, argv);
@@ -153,7 +155,6 @@ int main(int argc, char *argv[])
   RxFile.open(outcome_folder+"RxFile"+name+".log", std::fstream::out); // ofstream
   TxFile.open(outcome_folder+"TxFile"+name+".log", std::fstream::out); // ofstream
   ChannelVarLogFile.open(outcome_folder+"ChannelVar"+name+".log",std::fstream::out);
-  ChannelVarLogFile_stop.open(outcome_folder+"ChannelVar_stop"+name+".log",std::fstream::out);
   std::cout << YELLOW << "Configuration File: "<< JSONpath << " was selected" << RESET <<std::endl;
   RngSeedManager::SetRun(run);
   std::ifstream f(JSONpath);
@@ -269,8 +270,8 @@ int main(int argc, char *argv[])
   OnOffHelper clientHelper ("ns3::TcpSocketFactory", Address(Server_Address));
   clientHelper.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
   clientHelper.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
-  clientHelper.SetAttribute("DataRate",StringValue(to_string(40)+"Mbps"));
-  clientHelper.SetAttribute("MaxBytes", UintegerValue(2e6)); 
+  clientHelper.SetAttribute("DataRate",StringValue(to_string(app_rate)+"Mbps"));
+  clientHelper.SetAttribute("MaxBytes", UintegerValue(file_size)); 
   clientHelper.SetAttribute("PacketSize",UintegerValue(1460));
 
   Client_app.Add(clientHelper.Install(NodeContainer{nodes.Get(1)}));

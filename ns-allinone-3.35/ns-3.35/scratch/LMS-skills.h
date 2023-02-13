@@ -1,7 +1,6 @@
 #include <typeinfo>
 // State CurrentState_g = State::LoS;
 std::ofstream ChannelVarLogFile;
-std::ofstream ChannelVarLogFile_stop;
 std::vector<State> CurrentStates_g;
 
 std::vector<State2> CurrentDisconnectStates_g;
@@ -13,7 +12,6 @@ std::vector<double> timesInWork;
 std::vector<double> timesInStop;
 
 State Channelprev;
-State2 Channelprev_stop;
 
 // Genera varios, dependiendo de los enlaces que haya
 void CreateStateLinksLMS(vector<State>& CurrentStates){ // CurrentStates - to create a log to save each link-sate 
@@ -91,36 +89,13 @@ MakinaEventos_toy(ns3::Ptr<PointToPointNetDevice> nd1, const int& ifaceNumber1,c
   double bps1 = Band_pass.capFactor[CurrentStates_g.at(ifaceNumber1) - 1] * Band_pass.muLos * pktLen * 8;      // seleccion BW para estado actual
 
   nd1->SetDataRate(DataRate(bps1));
-  // std::cout << Simulator::Now().GetSeconds() << " --> " << bps1 << " bps (" << Band_pass.muLos * pktLen * 8 << " bps)"  << std::endl;
-  //std::cout << "The State Number in t1 is: " << CurrentStates_g.at(ifaceNumber1) << std::endl;
-  //std::cout << typeid(CurrentStates_g.at(ifaceNumber1)).name() << std::endl;
 
   if(CurrentStates_g.at(ifaceNumber1)!=Channelprev){
     ChannelVarLogFile << Simulator::Now().GetSeconds() << " " << CurrentStates_g.at(ifaceNumber1)<< std::endl;
   }
   Channelprev = CurrentStates_g.at(ifaceNumber1);
-  // switch (CurrentStates_g.at(ifaceNumber1)){
-  //   case State::LoS:
-  //     timesInLos[0].push_back(t_cambio1);
-  //     timesInLos[1].push_back(bps1);
-  //     // std::cout << "LoS" << std::endl;
-  //     break;
-  //   case State::MS:
-  //     timesInMs[0].push_back(t_cambio1);
-  //     timesInMs[1].push_back(bps1);
-  //     // std::cout << "MS" << std::endl;
-  //     break;
-  
-  //   case State::DS:
-  //     timesInDs[0].push_back(t_cambio1);
-  //     timesInDs[1].push_back(bps1);
-  //     // std::cout << "DS" << std::endl;
-  //     break;
 
-  //   default:
-  //     std::cout << "error al registrar tiempo y tasa de estado" << std::endl;
-  // }
-     Simulator::Schedule(Seconds(t_cambio1), &MakinaEventos_toy, nd1, ifaceNumber1, Band_pass, index1); 
+  Simulator::Schedule(Seconds(t_cambio1), &MakinaEventos_toy, nd1, ifaceNumber1, Band_pass, index1); 
 }
 
 
@@ -138,11 +113,6 @@ DisconnectMachine(ns3::Ptr<PointToPointNetDevice> nd2,const int& ifaceNumber2, c
   double bps2 = capFactor2[CurrentDisconnectStates_g.at(ifaceNumber2) - 1] * muLos2 * pktLen * 8;      // seleccion BW para estado actual
 
   nd2->SetDataRate(DataRate(bps2));
-  if(CurrentDisconnectStates_g.at(ifaceNumber2)!=Channelprev_stop){
-    ChannelVarLogFile_stop << Simulator::Now().GetSeconds() << " " << CurrentDisconnectStates_g.at(ifaceNumber2)<< std::endl;
-  }
-  Channelprev_stop = CurrentDisconnectStates_g.at(ifaceNumber2);
-
 
   Simulator::Schedule(Seconds(t_cambio2), &DisconnectMachine, nd2, ifaceNumber2, probMat2, capFactor2, muLos2, index2); 
 }
@@ -158,14 +128,6 @@ DisconnectMachine_toy(ns3::Ptr<PointToPointNetDevice> nd1, const int& ifaceNumbe
   double bps1 = Band_pass.capFactor[CurrentDisconnectStates_g.at(ifaceNumber2) - 1] * Band_pass.muLos * pktLen * 8;      // seleccion BW para estado actual
 
   nd1->SetDataRate(DataRate(bps1));
-  // std::cout << Simulator::Now().GetSeconds() << " --> " << bps1 << " bps (" << Band_pass.muLos * pktLen * 8 << " bps)"  << std::endl;
-  //std::cout << "The State Number in t1 is: " << CurrentStates_g.at(ifaceNumber1) << std::endl;
-  //std::cout << typeid(CurrentStates_g.at(ifaceNumber1)).name() << std::endl;
-  if(CurrentDisconnectStates_g.at(ifaceNumber2)!=Channelprev_stop){
-    ChannelVarLogFile_stop << Simulator::Now().GetSeconds() << " " << CurrentDisconnectStates_g.at(ifaceNumber2)<< std::endl;
-  }
-  Channelprev_stop = CurrentDisconnectStates_g.at(ifaceNumber2);
-
 
   Simulator::Schedule(Seconds(t_cambio1), &DisconnectMachine_toy, nd1, ifaceNumber2, Band_pass, index1); 
 }

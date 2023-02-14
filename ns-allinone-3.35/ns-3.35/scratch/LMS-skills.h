@@ -32,9 +32,9 @@ MakinaEventos(ns3::Ptr<PointToPointNetDevice> nd1, const int& ifaceNumber1, cons
 { 
 
   //std::cout << "The State Number in t0 is: " << CurrentStates_g.at(ifaceNumber1) << std::endl;
-  CurrentStates_g.at(ifaceNumber1) = SwapState(CurrentStates_g.at(ifaceNumber1), probMat3); // actualiza estado
-  double t_cambio1 = SwapTime(CurrentStates_g.at(ifaceNumber1), index1);                           // tiempo de permanencia en estado actual
-  double bps1 = capFactor1[CurrentStates_g.at(ifaceNumber1) - 1] * muLos1 * pktLen * 8;      // seleccion BW para estado actual
+  CurrentStates_g.at(ifaceNumber1) = SwapState(CurrentStates_g.at(ifaceNumber1), probMat3); // STATE UPDATE
+  double t_cambio1 = SwapTime(CurrentStates_g.at(ifaceNumber1), index1);                           //SOJOURN TIME IN CURRENT STATE
+  double bps1 = capFactor1[CurrentStates_g.at(ifaceNumber1) - 1] * muLos1 * pktLen * 8;      // SELECT BW FOR CURRENT STATE
 
   nd1->SetDataRate(DataRate(bps1));
 
@@ -42,9 +42,7 @@ MakinaEventos(ns3::Ptr<PointToPointNetDevice> nd1, const int& ifaceNumber1, cons
     ChannelVarLogFile << Simulator::Now().GetSeconds() << " " << CurrentStates_g.at(ifaceNumber1)<< std::endl;
   }
   Channelprev = CurrentStates_g.at(ifaceNumber1);
-  
-  // std::cout << "The State Number in t1 is: " << CurrentStates_g.at(ifaceNumber1) << std::endl;
-  // std::cout << typeid(CurrentStates_g.at(ifaceNumber1)).name() << std::endl;
+
   switch (CurrentStates_g.at(ifaceNumber1)){
     case State::LoS:
       timesInLos[0].push_back(t_cambio1);
@@ -84,9 +82,9 @@ MakinaEventos_toy(ns3::Ptr<PointToPointNetDevice> nd1, const int& ifaceNumber1,c
 { 
 
   //std::cout << "The State Number in t0 is: " << CurrentStates_g.at(ifaceNumber1) << std::endl;
-  CurrentStates_g.at(ifaceNumber1) = SwapState_truqui(CurrentStates_g.at(ifaceNumber1), Band_pass.probMat); // actualiza estado
-  double t_cambio1 = Band_pass.mean_time.at(0);                       // tiempo de permanencia en estado actual
-  double bps1 = Band_pass.capFactor[CurrentStates_g.at(ifaceNumber1) - 1] * Band_pass.muLos * pktLen * 8;      // seleccion BW para estado actual
+  CurrentStates_g.at(ifaceNumber1) = SwapState_truqui(CurrentStates_g.at(ifaceNumber1), Band_pass.probMat); // STATE UPDATE
+  double t_cambio1 = Band_pass.mean_time.at(0);                       // SOJOURN TIME IN CURRENT STATE
+  double bps1 = Band_pass.capFactor[CurrentStates_g.at(ifaceNumber1) - 1] * Band_pass.muLos * pktLen * 8;      // SELECT BW FOR CURRENT STATE
 
   nd1->SetDataRate(DataRate(bps1));
 
@@ -108,9 +106,9 @@ void
 DisconnectMachine(ns3::Ptr<PointToPointNetDevice> nd2,const int& ifaceNumber2, const ProbMat_t& probMat2, const array_t& capFactor2, const double& muLos2, string& index2)
 {
   
-  CurrentDisconnectStates_g.at(ifaceNumber2) = SwapStateDisconnect(CurrentDisconnectStates_g.at(ifaceNumber2), probMat2); // actualiza estado
-  double t_cambio2 = SwapTimeDisconnect(CurrentDisconnectStates_g.at(ifaceNumber2),index2);                           // tiempo de permanencia en estado actual
-  double bps2 = capFactor2[CurrentDisconnectStates_g.at(ifaceNumber2) - 1] * muLos2 * pktLen * 8;      // seleccion BW para estado actual
+  CurrentDisconnectStates_g.at(ifaceNumber2) = SwapStateDisconnect(CurrentDisconnectStates_g.at(ifaceNumber2), probMat2); 
+  double t_cambio2 = SwapTimeDisconnect(CurrentDisconnectStates_g.at(ifaceNumber2),index2);                           
+  double bps2 = capFactor2[CurrentDisconnectStates_g.at(ifaceNumber2) - 1] * muLos2 * pktLen * 8;      
 
   nd2->SetDataRate(DataRate(bps2));
 
@@ -123,9 +121,9 @@ DisconnectMachine_toy(ns3::Ptr<PointToPointNetDevice> nd1, const int& ifaceNumbe
 { 
 
   //std::cout << "The State Number in t0 is: " << CurrentStates_g.at(ifaceNumber1) << std::endl;
-  CurrentDisconnectStates_g.at(ifaceNumber2) = SwapStateDisconnect(CurrentDisconnectStates_g.at(ifaceNumber2), Band_pass.probMat); // actualiza estado
-  double t_cambio1 = Band_pass.mean_time.at(CurrentDisconnectStates_g.at(ifaceNumber2) - 1);                       // tiempo de permanencia fijado
-  double bps1 = Band_pass.capFactor[CurrentDisconnectStates_g.at(ifaceNumber2) - 1] * Band_pass.muLos * pktLen * 8;      // seleccion BW para estado actual
+  CurrentDisconnectStates_g.at(ifaceNumber2) = SwapStateDisconnect(CurrentDisconnectStates_g.at(ifaceNumber2), Band_pass.probMat); 
+  double t_cambio1 = Band_pass.mean_time.at(CurrentDisconnectStates_g.at(ifaceNumber2) - 1);                      
+  double bps1 = Band_pass.capFactor[CurrentDisconnectStates_g.at(ifaceNumber2) - 1] * Band_pass.muLos * pktLen * 8;      
 
   nd1->SetDataRate(DataRate(bps1));
 

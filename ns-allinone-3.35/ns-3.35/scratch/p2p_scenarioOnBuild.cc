@@ -148,8 +148,6 @@ int main(int argc, char *argv[])
   string cwnd_value = "Cubic";
   string outcome_folder = "";
   int run = 1;
-  std::ofstream logFile;
-  logFile.open("logLMS.log");
  
   CommandLine cmd(__FILE__);
   cmd.AddValue("json-path", "Configuration file name", JSONpath);
@@ -175,14 +173,12 @@ int main(int argc, char *argv[])
 
 
 
-  // LogComponentEnable("TapBridge", LOG_LEVEL_INFO);
-  std::string mode = "ConfigureLocal";
-  // std::string tapName = "ns3tap";
+
+
+ 
 
   NS_LOG_UNCOND ("SIM - START: Hello :)");
   std::cout << MAGENTA << BG_ORANGE <<"Simulator: Hello :)"<< RESET << std::endl;
-  // GlobalValue::Bind("SimulatorImplementationType", StringValue("ns3::RealtimeSimulatorImpl"));
-  // GlobalValue::Bind("ChecksumEnabled", BooleanValue(true));
   Config::SetDefault("ns3::TcpSocket::SegmentSize", UintegerValue(segmentSize));
   
   if (cwnd_value!="Cubic") { 

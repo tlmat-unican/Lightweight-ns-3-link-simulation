@@ -15,12 +15,7 @@ It has been tested in `Ubuntu 22.04.1 LTS` _(jammy)_. It has the following depen
 apt install python3
 apt install python3-pip
 ```
--  _brctl_, _tunctl_, _ip_ (should be there, just in case of using real hosts). You need to install the following packages for easy bridge management.
-```
-apt install bridge-utils
-apt install uml-utilities
-apt install iproute2
-```
+
 - Running NS3 optimized
 ```
 # first we clean all the compile options
@@ -102,6 +97,12 @@ In addition, the files used for the simulation of each of the scenarios using Py
             - logBuffer.log: [time | size buffer (B)]
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
 
+### Extras: Running with real hosts
+- _tunctl_, _ip_ (should be there, just in case of using real hosts). You need to install the following packages for easy bridge management.
+```
+apt install uml-utilities
+apt install iproute2
+```
 ## Outcomes - display
 In folder [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/), there is a Jupyter notebook, drawing the perfomance evolution from the result folders.
 ## Usage

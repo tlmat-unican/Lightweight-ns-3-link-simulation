@@ -105,14 +105,19 @@ apt install iproute2
 ```
 ## Outcomes - display
 In folder [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/), there is a Jupyter notebook, drawing the perfomance evolution from the result folders.
-## Usage
 
+## Usage
 To run a network topology the _<--name-->.py_ file:
 
 ```shell
 python3 <--name-->.py
 ```
-           
+
+## Jupyter NoteBook
+Contains code sections to reproduce the results which have been shown in the paper.
+
+
+
 ## Contact 
 
 * [Fátima Khan Blanco (khanf@unican.es)](mailto:khanf@unican.es)

@@ -114,7 +114,7 @@ python3 <--name-->.py
 ```
 
 ## Jupyter NoteBook
-Contains code sections to reproduce the results which have been shown in the paper.
+Contains code sections to reproduce the results which have been shown in the paper. According to the folder tree created by running the scripts, this notebook is able to show the performance of the obtained outcomes.
 
 
 

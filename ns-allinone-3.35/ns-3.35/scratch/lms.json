@@ -3,7 +3,7 @@
     "Links": [
         {
             "Link-type": "LMS",
-            "Band": "Ka_truqui_5sec",
+            "Band": "Ka",
             "DataRate": 60,
             "Delay": 10,
             "ErrorRate": 0,

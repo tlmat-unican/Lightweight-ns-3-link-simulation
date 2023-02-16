@@ -32,7 +32,7 @@ As mentioned above, [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/) folder cont
 ## Scenarios
 Below are the scripts that have been used to prepare the results of [PAPER], also, as mentioned, a version is included where the necessary Tap Briges are added to be able to mimic real hosts.
 
-In addition, the files used for the simulation of each of the scenarios using Python3 are described.
+In addition, the files used for the simulation of each of the scenarios using Python3 are described below, all of them are collected in [scripts](./scripts/). 
 
 ### Simple model: LMS TOY
 - Use python script _sim_ns3_lms_toy.py_
@@ -46,6 +46,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
             - logBuffer.log: [time | size buffer (B)]
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
             - ChannelVar_stop.log: [time | State] where State = {Work=1,Stop}
+    - Use mode: This script is able to run once the scenario, by excuting the _python3_ command. It creates a tree folder where the results are collected. You can adjust this parameters, as well as the scenario described in the aforementioned JSON file. After running this script, you obtain data files which are  handled by the Jupyter notebook to show the performance.
 ### LEO based scenarios: LMS 
 - Use python script _sim_ns3_lms.py_
     -   Requires:
@@ -103,12 +104,9 @@ In addition, the files used for the simulation of each of the scenarios using Py
 apt install uml-utilities
 apt install iproute2
 ```
-## Outcomes - display
-In folder [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/), there is a Jupyter notebook, drawing the perfomance evolution from the result folders.
 
 ## Usage
-To run a network topology the _<--name-->.py_ file:
-
+To run a network topology the _<--name-->.py_ file, where _name_ changes according the details explained above.
 ```shell
 python3 <--name-->.py
 ```

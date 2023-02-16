@@ -112,8 +112,7 @@ python3 <--name-->.py
 ```
 
 ## Jupyter NoteBook
-[Analysis.ipynb](./scripts/Analysis.ipynb) contains code sections to reproduce the results which have been shown in the paper. According to the folder tree created by running the scripts, this notebook is able to show the performance of the obtained outcomes. Besides, it embraces several figures as an example of what you can get running the code sections. Code sections are organized by the mimicked scenarios.
-
+[Analysis.ipynb](./scripts/Analysis.ipynb) contains code snippets to reproduce the results shown in the paper. According to the folder tree created by running the scripts, this notebook is able to show the performance of the results obtained. It also includes several figures as examples of what can be obtained by running the code sections. The code snippets are organised according to the scenarios simulated.
 
 
 ## Contact 

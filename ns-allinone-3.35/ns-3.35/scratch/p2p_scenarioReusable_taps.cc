@@ -40,7 +40,7 @@ using namespace std;
 using json = nlohmann::json;
 
 
-NS_LOG_COMPONENT_DEFINE("TapCsmaDocker");
+NS_LOG_COMPONENT_DEFINE("TapCsmaNS3_Scenario");
 
 
 
@@ -164,9 +164,7 @@ int main(int argc, char *argv[])
 
 
 
-  NS_LOG_UNCOND ("Simulator: Hello :)");
-
-    // LogComponentEnable("TapBridge", LOG_LEVEL_INFO);
+ 
   std::string mode = "ConfigureLocal";
   // std::string tapName = "ns3tap";
 

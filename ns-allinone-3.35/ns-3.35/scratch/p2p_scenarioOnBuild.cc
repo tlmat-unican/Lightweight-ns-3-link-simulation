@@ -55,18 +55,21 @@ using namespace std;
 using json = nlohmann::json;
 
 
-NS_LOG_COMPONENT_DEFINE("TapCsmaDocker");
+NS_LOG_COMPONENT_DEFINE("Ns3_scenario");
 
 
-#include "LMS-Bands.h"
-#include "LMS-skills.h"
-#include "Reusability_functionsBuildOn.h"
 
 #define GREEN   "\x1b[32m"
 #define YELLOW  "\x1b[33m"
 #define MAGENTA "\x1b[35m"
 #define BG_ORANGE  "\x1B[48;2;255;128;0m"
 #define RESET   "\x1b[0m"
+
+
+
+#include "LMS-Bands.h"
+#include "LMS-skills.h"
+#include "Reusability_functionsBuildOn.h"
 
 // Global variables
 std::uint64_t currentBuffer = 0u;
@@ -177,7 +180,7 @@ int main(int argc, char *argv[])
 
  
 
-  NS_LOG_UNCOND ("SIM - START: Hello :)");
+  // NS_LOG_UNCOND ("SIM - START: Hello :)");
   std::cout << MAGENTA << BG_ORANGE <<"Simulator: Hello :)"<< RESET << std::endl;
   Config::SetDefault("ns3::TcpSocket::SegmentSize", UintegerValue(segmentSize));
   
@@ -204,8 +207,8 @@ int main(int argc, char *argv[])
     stack.Install(nodes.Get(i));
   }
    
-  std::cout << "INSTALL: Internet Stack >> finished" << std::endl;
-  NS_LOG_UNCOND ("Nodes Created");
+  std::cout <<  MAGENTA << "INFO: " << RESET << "Internet Stack >> finished" << std::endl;
+ 
 
 
 
@@ -224,8 +227,8 @@ int main(int argc, char *argv[])
   
 
   Ipv4GlobalRoutingHelper::PopulateRoutingTables();
-  NS_LOG_UNCOND ("SET: Routing Tables Populated");
-  std::cout << "SET: Routing Tables Populated >> finished" << std::endl;
+  // NS_LOG_UNCOND ("SET: Routing Tables Populated");
+  std::cout << MAGENTA << "INFO: " << RESET <<"Routing Tables Populated >> finished" << std::endl;
 
   //-----------------------------------------------------------------------------------------
  
@@ -234,7 +237,7 @@ int main(int argc, char *argv[])
   
   SettingUpModelLinks(data, Devs, timevalue); // To set up the link model: Land-Mobile-System or Disconnections
  
-  NS_LOG_UNCOND ("Configuration finished");
+  // NS_LOG_UNCOND ("Configuration finished");
 
 
 
@@ -281,7 +284,7 @@ int main(int argc, char *argv[])
   Simulator::Run();
   Simulator::Destroy();
 
-  std::cout << "Sink: Total RX - " << Server_trace->GetTotalRx() << " bytes" << std::endl;
+  std::cout << MAGENTA << "INFO: " << RESET << "Sink: Total RX - " << Server_trace->GetTotalRx() << " bytes" << std::endl;
   return 0;
 
   

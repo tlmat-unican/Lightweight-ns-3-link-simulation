@@ -41,7 +41,7 @@ void CreateMiddleLinks(PointToPointHelper pointToPoint, vector<NetDeviceContaine
         }
         // cout << "The number of PDPdev "<< i+1 <<" created is: " << Devs.at(i).GetN() << "\n";
     }
-    std::cout << "Middle Links created" << std::endl;
+    std::cout << MAGENTA << "INFO: " << RESET <<"Middle Links created" << std::endl;
 
 }
 
@@ -75,12 +75,12 @@ void  SettingupMiddleNetworks(vector<Ipv4InterfaceContainer>& ifacesP2p, vector<
         Ipv4AddressHelper addressesP2p;
         string str = "11." + std::to_string(i+1) + ".0.0";
         const char* adr = str.c_str();
-        cout << "Creating P2P Network "<< i+1 <<": " << str << "\n";
+        std::cout << MAGENTA << "INFO: " << RESET <<"Creating P2P Network "<< i+1 <<": " << str << "\n";
         addressesP2p.SetBase(adr,"255.255.255.0");
         Ipv4InterfaceContainer ifacP2p = addressesP2p.Assign(Devs.at(i)); // Assign fuction returns a Ipv4InterfaceConatiner 
         ifacesP2p.push_back(ifacP2p);
         
-        cout << "Ifaces P2P are " << ifacesP2p.at(i).GetN() << "\n";  
+        std::cout << MAGENTA << "INFO: " << RESET << "Ifaces P2P are " << ifacesP2p.at(i).GetN() << "\n";  
 
     }
 
@@ -98,9 +98,10 @@ void ManageMiddleLinks(json data, PointToPointHelper pointToPoint, vector<NetDev
         cout << "Simulation with only 1 link due to the same features!!\n";
         auxnodes = 1 + 1;
         nodes.Create(auxnodes);
-        NS_LOG_UNCOND ("Nodes Created");
+        // NS_LOG_UNCOND ("Nodes Created");
+        std::cout << MAGENTA << "INFO: " << RESET <<"Nodes created"<< std::endl;
         int Link = SearchMinLink(data);
-        std::cout << "Numero del enlace: " << Link << std::endl;
+        std::cout << MAGENTA << "INFO: " << RESET <<"Numero del enlace: " << Link << std::endl;
         pointToPoint.SetDeviceAttribute("DataRate", StringValue(to_string(data.at("Links")[Link]["DataRate"]) + "Mbps")); // BW
         pointToPoint.SetChannelAttribute("Delay", StringValue(to_string(data.at("Links")[Link]["Delay"]) + "ms"));      // delay
         pointToPoint.SetDeviceAttribute("Mtu", UintegerValue(data.at("Links")[Link]["MTU"]));
@@ -109,7 +110,7 @@ void ManageMiddleLinks(json data, PointToPointHelper pointToPoint, vector<NetDev
 
         NetDeviceContainer p2pDev = pointToPoint.Install(NodeContainer{nodes.Get(0), nodes.Get(1)});
         Devs.push_back(p2pDev);
-        NS_LOG_UNCOND ("Devices Created");
+        std::cout << MAGENTA << "INFO: " << RESET <<"Devices created"<< std::endl;
         Ptr<RateErrorModel> em = CreateObject<RateErrorModel>();
         em->SetAttribute("ErrorRate", DoubleValue(data.at("Links")[Link]["ErrorRate"]));
         em->SetAttribute("ErrorUnit", EnumValue(2)); // ERROR_UNIT_PACKET
@@ -123,7 +124,7 @@ void ManageMiddleLinks(json data, PointToPointHelper pointToPoint, vector<NetDev
        // NS_LOG_UNCOND ("Nodes Created");
         CreateMiddleLinks(pointToPoint,Devs,data,nodes);
     }
-    std::cout << "Manage Midlle Links finished" << std::endl;
+    std::cout << MAGENTA << "INFO: " << RESET << "Manage Midlle Links finished" << std::endl;
 }
 
 
@@ -140,7 +141,6 @@ BackgroundTrafficSetup(ApplicationContainer& app, ApplicationContainer& sinkApps
       for (int i = 0; i < (int) data.at("NumLinks") ; i++){
         if (data.at("Links")[i]["Background"]){
             Address sinkAddress(InetSocketAddress(ifacesP2p.at(i).GetAddress(1,0), sinkport));
-            // PacketSinkHelper packetSinkHelper("ns3::UdpSocketFactory",Address(sinkAddress));
             PacketSinkHelper packetSinkHelper("ns3::TcpSocketFactory",Address(sinkAddress));
             sinkApps.Add(packetSinkHelper.Install(nodes.Get(i+1))); // Node 3: Destination node
             sinkApps.Start(Seconds(start_time));
@@ -158,7 +158,7 @@ BackgroundTrafficSetup(ApplicationContainer& app, ApplicationContainer& sinkApps
             app.Add(Sender.Install(NodeContainer{nodes.Get(i)}));
             app.Start(Seconds(start_time));
             
-            std::cout << "Ideal Link: " << i + 1 << " with background traffic" << std::endl; 
+            std::cout << MAGENTA << "INFO: " << RESET << "Ideal Link: " << i + 1 << " with background traffic" << std::endl; 
             sinkport +=1;    
         }
     }
@@ -190,7 +190,7 @@ SettingUpModelLinks(json data, const vector<NetDeviceContainer>& Devs, float tim
                     Simulator::Schedule(Seconds(0), &DisconnectMachine_toy,
                     DynamicCast<ns3::PointToPointNetDevice>(Devs.at(i).Get(1)), aux1, Bands[data.at("Links")[i]["Band"]], indexDisconnect);
                     // ChannelVarLogFile << Simulator::Now().GetSeconds() << " " << 1 << std::endl;
-                    std::cout << "Disconnection Link " << i+1 << " has been created" << std::endl;
+                    std::cout << MAGENTA << "INFO: " << RESET <<"Disconnection Link " << i+1 << " has been created" << std::endl;
                     aux1 = aux1 + 1;
 
                 }else{
@@ -204,7 +204,7 @@ SettingUpModelLinks(json data, const vector<NetDeviceContainer>& Devs, float tim
                     Bands[data.at("Links")[i]["Band"]].capFactor, Bands[data.at("Links")[i]["Band"]].muLos, indexDisconnect);
                     //cout << "A dropped connection " << i << " has been created\n";
                     aux1 = aux1 + 1;
-                    std::cout << "Disconnection Link " << i+1 << " has been created" << std::endl;
+                    std::cout << MAGENTA << "INFO: " << RESET <<"Disconnection Link " << i+1 << " has been created" << std::endl;
 
                 }
                 
@@ -226,7 +226,7 @@ SettingUpModelLinks(json data, const vector<NetDeviceContainer>& Devs, float tim
                     Simulator::Schedule(Seconds(0), &MakinaEventos_toy,
                     DynamicCast<ns3::PointToPointNetDevice>(Devs.at(i).Get(1)), aux2, Bands[data.at("Links")[i]["Band"]], indexLMS);
                  
-                    cout << "LMS Link " << i + 1 << " has been created" << std::endl;
+                    std::cout << MAGENTA << "INFO: " << RESET <<"LMS Link " << i + 1 << " has been created" << std::endl;
                     aux2 = aux2 + 1;
 
                 }else{
@@ -238,7 +238,7 @@ SettingUpModelLinks(json data, const vector<NetDeviceContainer>& Devs, float tim
                     Simulator::Schedule(Seconds(0), &MakinaEventos,
                     DynamicCast<ns3::PointToPointNetDevice>(Devs.at(i).Get(1)), aux2, Bands[data.at("Links")[i]["Band"]].probMat, 
                     Bands[data.at("Links")[i]["Band"]].capFactor, Bands[data.at("Links")[i]["Band"]].muLos, indexLMS);
-                    std::cout << "LMS Link " << i + 1 << " has been created" << std::endl;
+                    std::cout << MAGENTA << "INFO: " << RESET << "LMS Link " << i + 1 << " has been created" << std::endl;
                     aux2 = aux2 + 1;
                 }
                 

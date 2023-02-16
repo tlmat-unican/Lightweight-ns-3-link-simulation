@@ -58,6 +58,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
             - TXFile.log: [num pkt | time | size pkt (B)]
             - logBuffer.log: [time | size buffer (B)]
             - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
+    - Mode of use: This script is able to run once the scenario, by excuting the _python3_ command. It creates a tree folder where the results are collected. You can customise this parameters, as well as the scenario described in the aforementioned JSON file. After running this script, you will get data files which are handled by the Jupyter notebook to show the performance.
            
 ### LEO based scenarios: LMS - Background traffic - LMS
 - Use python script _sim_ns3_sims_stop.py_

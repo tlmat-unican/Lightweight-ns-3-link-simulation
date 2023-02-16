@@ -16,7 +16,10 @@ Nsim = 1
 sim_rate = 0
 Transport_model = "Cubic"
 OutcomeFolder = "OUTCOMES"
-
+Min_rate = 5
+Max_rate = 30
+Step = 1
+background_traff_swept = range(Min_rate,Max_rate,Step)
 
 
 
@@ -60,7 +63,7 @@ def main():
     print("Start sim")
 
     os.system("mkdir {}/BackTrafficv2/".format(OutcomeFolder))
-    for sim_rate in range(5,31,1):
+    for sim_rate in background_traff_swept:
       Sim_name = "{}_finito_1BDPConfigScenario{}_sims".format(Transport_model,sim_rate)
       cmd = 'mkdir ./{}/BackTrafficv2/{}/'.format(OutcomeFolder,Sim_name)
       os.system(cmd)

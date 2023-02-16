@@ -73,6 +73,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
                 - logBuffer.log: [time | size buffer (B)]
                 - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
     - Mode of use: This script is able to run the scenario, by excuting the _python3_ command. It creates a tree folder where the results are collected. You can customise this parameters, as well as the scenario described in the aforementioned JSON file. After running this script, you will get data files which are handled by the Jupyter notebook to show the performance. MonteCarlo simulations [Nsim] and swept range of the bacgorun traffic can be adjusted. 
+    Scenario values:
         - Nsim  = 100
         - [ 5 to 30 ] Mbps with step = 1 Mbps. 
                

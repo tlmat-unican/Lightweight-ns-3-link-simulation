@@ -1,4 +1,4 @@
-# Tittle : [Name of the Paper]
+# Lightweight modeling of dynamic channels: application to NTN scenarios
 ## Usage requirements
 
 - Intsall [Python3](https://www.python.org/downloads/) 

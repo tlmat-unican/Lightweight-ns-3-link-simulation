@@ -128,7 +128,7 @@ python3 <--name-->.py
 
 ## Jupyter NoteBook
 [Analysis.ipynb](./scripts/Analysis.ipynb) contains code snippets to reproduce the results shown in the paper. According to the folder tree created by running the scripts, this notebook is able to show the performance of the results obtained. It also includes several figures as examples of what can be obtained by running the code sections. The code snippets are organised according to the scenarios simulated.
-In folder [figures](./figures/), there are three figures which show the performance of the third setup, LMS - Background traffic - LMS, asn an example of what you can obtain running the code sections including in the Jupyter notebook.
+In folder [figures](./figures/), there are three figures which show the performance of the third setup, LMS - Background traffic - LMS, , asn an example of what you can obtain running the code sections including in the Jupyter notebook.
 
 ## Contact 
 

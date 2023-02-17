@@ -16,10 +16,11 @@ Nsim = 1
 sim_rate = 0
 Transport_model = "Cubic"
 OutcomeFolder = "OUTCOMES"
+## To set up Background traffic swept
 Min_rate = 5
 Max_rate = 30
 Step = 1
-background_traff_swept = range(Min_rate,Max_rate,Step)
+background_traff_swept = range(Min_rate,Max_rate,Step) ## To create sweep range
 
 
 

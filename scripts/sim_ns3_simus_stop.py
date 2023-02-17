@@ -16,7 +16,12 @@ ns3Path = '../ns-allinone-3.35/ns-3.35'
 ConfigPath = "/scratch/ConfigScenario_stop.json"
 Outcomefolder= "OUTCOMES"
 Nsim = 1 ## To set the number of simulations from each scenario
-
+## To set up Stop time swept
+Time_min_value = 0
+Time_max_value = 3.2
+Step = 0.2
+time_range = np.round(np.arange(Time_min_value,Time_max_value,Step),2) ## To create sweep range
+   
 Transport_model = "Cubic"
 
 if ConfigPath!="":
@@ -47,8 +52,7 @@ def StopNs3 (scenario) :
 def main():
     print("Start sim")
     os.system("mkdir {}/Disconnection2/".format(Outcomefolder))
-    time_range = np.round(np.arange(0,3.2,0.2),2)
-    print(time_range)
+   
     for timevalue in time_range:
       Sim_name = "{}/Disconnection2/{}stop{}_sims".format(Outcomefolder,Transport_model,timevalue)
       cmd = 'mkdir ./{}/'.format(Sim_name)

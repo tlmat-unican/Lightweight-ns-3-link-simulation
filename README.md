@@ -35,6 +35,7 @@ Below are the scripts that have been used to prepare the results of [PAPER], als
 In addition, the files used for the simulation of each of the scenarios using Python3 are described below, all of them are collected in [scripts](./scripts/). 
 
 ### Simple model: LMS TOY
+This script deploys a Land - Mobile - System, with 5 s stay time in each state.
 - Use python script _sim_ns3_lms_toy.py_
     -   Requires:
         - lms_toy.json [Location: Scratch folder inside ns3-35 folder]
@@ -48,6 +49,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
             - ChannelVar_stop.log: [time | State] where State = {Work=1,Stop}
     - Mode of use: This script is able to run once the scenario, by excuting the _python3_ command. It creates a tree folder where the results are collected. You can customise this parameters, as well as the scenario described in the aforementioned JSON file. After running this script, you will get data files which are handled by the Jupyter notebook to show the performance.
 ### LEO based scenarios: LMS 
+This script deploys a Land - Mobile - System, with exponentially distributed stay times.
 - Use python script _sim_ns3_lms.py_
     -   Requires:
         - lms.json [Location: Scratch folder inside ns3-35 folder]
@@ -61,6 +63,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
     - Mode of use: This script is able to run once the scenario, by excuting the _python3_ command. It creates a tree folder where the results are collected. You can customise this parameters, as well as the scenario described in the aforementioned JSON file. After running this script, you will get data files which are handled by the Jupyter notebook to show the performance.
            
 ### LEO based scenarios: LMS - Background traffic - LMS
+This script deploys three links, UP/DOWN links are modeling a Land - Mobile - System and the ISL link presents background traffic. This last feature is swept.
 - Use python script _sim_ns3_sims_stop.py_
     -   Requires:
         - ConfigScenario_back_template.json [Location: Scratch folder inside ns3-35 folder]
@@ -79,6 +82,7 @@ In addition, the files used for the simulation of each of the scenarios using Py
                
 
 ### LEO based scenarios: LMS - Interrupted Channel - LMS
+This script deploys three links, UP/DOWN links are modeling a Land - Mobile - System and the ISL link presents disconnections. This last feature is swept.
 - Use python script _sim_ns3_sims_background_traffic.py_
     -   Requires:
         - ConfigScenario_back_template.json [Location: Scratch folder inside ns3-35 folder]

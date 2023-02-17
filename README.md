@@ -33,6 +33,7 @@ As mentioned above, [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/) folder cont
 Below are the scripts that have been used to prepare the results of [PAPER], also, as mentioned, a version is included where the necessary Tap Briges are added to be able to mimic real hosts.
 
 In addition, the files used for the simulation of each of the scenarios using Python3 are described below, all of them are collected in [scripts](./scripts/). 
+All of them include a ns-3 client and server, sending a 300 MB datafile with a rate of 40 Mbps, the tap-scenario too.
 
 ### Simple model: LMS TOY
 This script deploys a Land - Mobile - System, with 5 s stay time in each state.
@@ -100,6 +101,7 @@ This script deploys three links, UP/DOWN links are modeling a Land - Mobile - Sy
         - Stop mean time = [0 to 3] s with step = 0.2 s. 
               
 ### Applications with ns-3 TAP
+This script is able to deploy any scenario and assign real host in each network end.
 - Use python script _sim_ns3_taps.py_
     -   Requires:
         - lms_toy.json [Location: Scratch folder inside ns3-35 folder]

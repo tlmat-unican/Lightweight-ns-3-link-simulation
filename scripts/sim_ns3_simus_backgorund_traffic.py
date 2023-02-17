@@ -12,7 +12,7 @@ import subprocess
 ns3ScenarioC = 'scratch/p2p_scenarioOnBuild'
 ns3Path = '../ns-allinone-3.35/ns-3.35'
 ConfigPath = "/scratch/ConfigScenario.json"
-Nsim = 1
+Nsim = 1 ## To set the number of simulations from each scenario
 sim_rate = 0
 Transport_model = "Cubic"
 OutcomeFolder = "OUTCOMES"

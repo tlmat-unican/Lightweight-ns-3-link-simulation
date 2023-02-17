@@ -6,7 +6,7 @@
 - Intsall [Jupyter](https://jupyter.org/install) 
 ## Project Structure
 - Two scenarios are included in folder [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/), it has been tested for _ns-3.35_.  One of them includes tap-bridges.
-- Folder [_scripts_](./scripts/) contains every script needed to run each topology, shown in the paper. It also contains Jupyter notebooks to represent the outcomes.
+- Folder [_scripts_](./scripts/) contains every script needed to run each topology shown in the paper. It also contains a Jupyter notebook to represent the outcomes.
 ## Dependecies 
 It has been tested in `Ubuntu 22.04.1 LTS` _(jammy)_. It has the following dependencies:
 
@@ -30,7 +30,7 @@ apt install python3-pip
 As mentioned above, [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/) folder contains the scenarios. Besides, it includes the needed utilities to deploy a topology and the skills to mimic a variant channel. 
 
 ## Scenarios
-Below are the scripts that have been used to prepare the results of [PAPER], also, as mentioned, a version is included where the necessary Tap Briges are added to be able to mimic real hosts. The scripts automatically generate the folder tree where the results are stored, and by keeping this structure, a representation of the results can be obtained like in the paper.
+Below are the scripts that have been used to prepare the results of the paper, as mentioned, a version is included where the necessary Tap Briges are added to be able to mimic real hosts. The scripts automatically generate the folder tree where the results are stored, and by keeping this structure, a representation of the results can be obtained like in the paper.
 
 In addition, the files used for the simulation of each of the scenarios using Python3 are described below, all of them are collected in [scripts](./scripts/). 
 All of them include a ns-3 client and server, sending a 300 MB datafile with a rate of 40 Mbps, the tap-scenario too. 

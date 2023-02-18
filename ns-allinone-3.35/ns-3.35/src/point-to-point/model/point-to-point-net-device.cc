@@ -64,31 +64,6 @@ namespace ns3
                                           MakeDataRateAccessor(&PointToPointNetDevice::m_bps),
                                           MakeDataRateChecker())
 
-                            // Probando: hacer dataRate variable
-                            .AddAttribute("RandomRate",
-                                          "Data rate depende de variable aleatoria",
-                                          StringValue("ns3::UniformRandomVariable[Min=0.0|Max=300.0]"),
-                                          MakePointerAccessor(&PointToPointNetDevice::va_bps),
-                                          MakePointerChecker<RandomVariableStream>())
-
-                            .AddAttribute("Mode",
-                                          "modo de eleccion de rate, var constante o aleatoria ",
-                                          EnumValue(PointToPointNetDevice::MODE_CONSTANTE),
-                                          MakeEnumAccessor(&PointToPointNetDevice::m_mode),
-                                          MakeEnumChecker(PointToPointNetDevice::MODE_CONSTANTE, "Constante",
-                                                          PointToPointNetDevice::MODE_VA, "VA",
-                                                          PointToPointNetDevice::MODE_OTROS, "OTROS"))
-
-                            .AddAttribute("EventTime", "interval of time at which DataRate changes",
-                                          TimeValue(Seconds(1.0)),
-                                          MakeTimeAccessor(&PointToPointNetDevice::t_interval),
-                                          MakeTimeChecker())
-
-                            .AddAttribute("TimeStart", "Time when source starts the simulation",
-                                          TimeValue(Seconds(1.0)),
-                                          MakeTimeAccessor(&PointToPointNetDevice::t_start),
-                                          MakeTimeChecker())
-
                             // ***************************************
                             .AddAttribute("ReceiveErrorModel",
                                           "The receiver error model used to simulate packet loss",
@@ -222,7 +197,6 @@ namespace ns3
 
   {
     NS_LOG_FUNCTION(this);
-    t_start = t_start + t_interval;
     // m_queue->SetMaxSize(QueueSize("8p"));
   }
 
@@ -301,58 +275,6 @@ namespace ns3
     return;
   }
 
-  //   ******************cambiando data rate **************************************************
-
-  int PointToPointNetDevice::Evento()
-  {
-
-    int ret = t_start.Compare(Simulator::Now());
-
-    if (ret >= 0)
-    {
-
-      return 1;
-    }
-    else
-    {
-
-      t_start = t_start + t_interval; // tiempo para siguiente cambio de rate
-      return 0;
-    }
-  }
-
-  void
-  PointToPointNetDevice::CambioRate()
-  {
-    NS_LOG_FUNCTION(this);
-
-    if (m_mode == PointToPointNetDevice::MODE_CONSTANTE)
-    {
-      return;
-    }
-    else if (m_mode == PointToPointNetDevice::MODE_VA)
-    {
-      if (Evento() == 1)
-      {
-        return;
-      }
-      // Evento comprueba si ha pasado el tiempo especificado entre cambios de rate
-      bps = va_bps->GetInteger(); // siguiente entero aleatorio
-      std::cout << "en CambioRate, entero obtenido:  " << bps << ";  Tiempo de simulacion: " << Simulator::Now().GetSeconds() << std::endl;
-      bps = bps * 1000;           // convierto a kbps
-      SetDataRate(DataRate(bps)); // sobreescribo el datarate anterior
-      NS_LOG_DEBUG(this << "| " << Simulator::Now().GetSeconds() << " | kbps dentro de funcion cambiorate: " << bps << " bps");
-    }
-    else if (m_mode == PointToPointNetDevice::MODE_OTROS)
-    {
-      return;
-    }
-    else
-    {
-      std::cout << "Error, modo de distribución de ancho de banda del canal no reconocido" << std::endl;
-    }
-  }
-  //          **********************
   void
   PointToPointNetDevice::SetInterframeGap(Time t)
   {
@@ -376,12 +298,8 @@ namespace ns3
     m_currentPkt = p;
     m_phyTxBeginTrace(m_currentPkt);
 
-    // std::cout << "en p2pNetDevice tenemos p_size= " << p->GetSize() << std::endl;
-    CambioRate();
-    Time txTime = m_bps.CalculateBytesTxTime(p->GetSize() - 30); // para no tener en cuenta cabeceras. 8udp+20ip+2ppp
-    // Time txTime = m_bps.CalculateBytesTxTime(p->GetSize()); //calcula el tiempo de la cabecera también.
+    Time txTime = m_bps.CalculateBytesTxTime(p->GetSize() - 30); // this is to ignore headers 8udp+20ip+2ppp
     Time txCompleteTime = txTime + m_tInterframeGap;
-    // std::cout << "At " << Simulator::Now().GetSeconds()<< " en transmit_start, Ts d este pkt es: " << txCompleteTime.GetSeconds()<< std::endl;
 
     NS_LOG_LOGIC("Schedule TransmitCompleteEvent in " << txCompleteTime.GetSeconds() << "sec");
     NS_LOG_DEBUG("Scheduled TransmitComplete to " << txCompleteTime.GetMilliSeconds() + Simulator::Now().GetMilliSeconds() << "ms \t| "

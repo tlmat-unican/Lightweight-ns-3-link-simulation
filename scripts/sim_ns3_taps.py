@@ -1,28 +1,17 @@
+
+import os
 ''' 
 This script is used to deploy the tap - scenario with a LMS-toy topology.
 '''
-
-
-
-
-import os
-import time 
-import subprocess
-
-
-
 ## Global Params
 ns3ScenarioC = 'scratch/p2p_scenarioReusable_taps'
 ns3Path = '../ns-allinone-3.35/ns-3.35'
 ConfigPath = "/scratch/lms_toy.json"
 OutcomeFolder = "OUTCOMES/"
-
 # Creating outcome folder if it doesn't exit
 os.system('mkdir ./{}'.format(OutcomeFolder))
-
 Transport_model = "Cubic"
 Sim_name = "{}{}LMStoy_taps".format(OutcomeFolder,Transport_model)
-
 if ConfigPath!="":
     ConfigPathStr="--json-path={}".format(ConfigPath)
 
@@ -35,8 +24,6 @@ if Transport_model!="":
 cmd = 'mkdir ./{}/'.format(Sim_name)
 
 os.system(cmd)
-
-
 # To remove tap and bringing interfaces down 
 def DetachAndRemoveTaps ():
   '''
@@ -49,8 +36,6 @@ def DetachAndRemoveTaps ():
   os.system('sudo ip link set dev tap-right down')  
   os.system('sudo tunctl -d tap-left')
   os.system('sudo tunctl -d tap-right')
-
-
 
 def RunNs3 (ns3Path, scenario, ConfigPath,folder_name,Config_model_value):
   cmd = 'cd {} && sudo ./waf'.format(ns3Path)
@@ -71,14 +56,10 @@ def StopNs3 (scenario) :
   print(cmd)
   os.system (cmd)
 
-
-
 def main():
     DetachAndRemoveTaps()
     print("Start sim")
     RunNs3(ns3Path, ns3ScenarioC, ConfigPath, Config_Out, Config_Model)
-
-
 
 if __name__ == '__main__':
   main()

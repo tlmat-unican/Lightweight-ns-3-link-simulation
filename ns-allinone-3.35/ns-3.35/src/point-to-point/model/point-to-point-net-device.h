@@ -97,30 +97,7 @@ namespace ns3
    */
     void SetDataRate(DataRate bps);
 
-    /** e ***********************************************************
-    * añado
-    *   
-    *   Funcion cambio data rate:
-        */
-    void CambioRate(void);
-    /**
-     * enumeracion de tipos
-     * */
-    int bps;
-    enum Mode  {
-    MODE_CONSTANTE,
-    MODE_VA,
-    MODE_OTROS
-  };
-
-    //evento de cambio de rate, comparando tiempos
-    int Evento(void);
-
-    //  FUNcion crear distribucion
-    void CreaDistribucion(void);
-
-    // e   *********************************
-
+ 
     /**
    * Set the interframe gap used to separate packets.  The interframe gap
    * defines the minimum space required between packets sent by this device.
@@ -226,13 +203,6 @@ namespace ns3
     void DoMpiReceive(Ptr<Packet> p);
 
   private:
-    /** meto los modos de enumerados                          *********************
-     * */
-    enum Mode m_mode;
-
-    
-
-
     /**
    * \brief Assign operator
    *
@@ -333,12 +303,6 @@ namespace ns3
    */
     DataRate m_bps;
 
-    /**
-     * 
-     *  AñADIDO: BPS RANDOM   ****************************************************************
-    */
-    Ptr<RandomVariableStream> va_bps;
-
     /*Añado puntero a pakt para salida de cero
     */
     Ptr<Packet> m_p;
@@ -347,15 +311,6 @@ namespace ns3
    * transmission
    */
     Time m_tInterframeGap;
-
-    //el intervalo de tiempo tras el que cambia el datarate          ******************************************
-    Time t_interval;
-
-    //tiempo de inicio de transmisión
-    Time t_start;
-
-    //Tiempo de siguiente cambio
-
 
     /**
    * The PointToPointChannel to which this PointToPointNetDevice has been
@@ -533,7 +488,6 @@ namespace ns3
    * \return The corresponding PPP protocol number
    */
     static uint16_t EtherToPpp(uint16_t protocol);
-    //Time m_cambioEvento;
   };
 
 } // namespace ns3

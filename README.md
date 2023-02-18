@@ -1,134 +1,112 @@
 # Lightweight modeling of dynamic channels: application to NTN scenarios
-## Usage requirements
 
-- Intsall [Python3](https://www.python.org/downloads/) 
-- Install [ns-3](https://www.nsnam.org/wiki/Installation)
-- Intsall [Jupyter](https://jupyter.org/install) 
-## Project Structure
-- Two scenarios are included in folder [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/), it has been tested for _ns-3.35_.  One of them includes tap-bridges.
-- Folder [_scripts_](./scripts/) contains every script needed to run each topology shown in the paper. It also contains a Jupyter notebook to represent the outcomes.
-## Dependecies 
+This repository contains the implementation over ns-3 of thoretical wireless link models based on Markov Chains. This modeling is intended to carry out performance evalaution of upper layers (e.g. transport) over dynamic channels without the complexity of detailed implementation of wireless technologies. 
+
+## Dependencies
+
 It has been tested in `Ubuntu 22.04.1 LTS` _(jammy)_. It has the following dependencies:
+- Dependencies of [ns-3](https://www.nsnam.org/wiki/Installation)
+```
+apt install g++ python3 cmake ninja-build git
+```
 
-- _python3_, _pip3_,
+- _python3_ and _pip3_ to automatize the evaluation
 ```
 apt install python3
 apt install python3-pip
 ```
 
-- Running NS3 optimized
+- [Jupyter](https://jupyter.org/install) optional to generate plots.
+
+## Project Structure
+- The folder [_ns-allinone-3.35_](./ns-allinone-3.35) contains a copy of _ns-3_. The [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/) folder contains a generic scenario ([_p2p_scenarioOnBuild.cc_](./ns-allinone-3.35/ns-3.35/scratch/p2p_scenarioOnBuild.cc)) to generate evaluation topologies. A second scenario [_p2p_scenarioReusable_taps.cc_](./ns-allinone-3.35/ns-3.35/scratch/p2p_scenarioReusable_taps.cc)) has been defined to use the link models with real applications using ns-3 TAP. 
+
+- The [_scripts_](./scripts/) folder contains scripts needed to run different topologies. It also contains a Jupyter notebook to represent the outcomes.
+
+## Building ns-3
+
+Configure and compile ns-3, we disable not used functionalities
 ```
-# first we clean all the compile options
-./waf distclean
-# we configure the compile options as optimized, disable examples, tests, python integration and static.
-./waf configure --disable-python --disable-tests --disable-examples --build-profile=optimized
-# we recompile (this might take some time)
+cd ns-allinone-3.35/ns-3.35
+./waf configure --disable-werror --disable-python --disable-tests --disable-examples --build-profile=optimized
 ./waf
 ```
 
-## Event - Driver - Simulator - Utilities
-As mentioned above, [_scratch_](./ns-allinone-3.35/ns-3.35/scratch/) folder contains the scenarios. Besides, it includes the needed utilities to deploy a topology and the skills to mimic a variant channel. 
-
 ## Scenarios
-Below are the scripts that have been used to prepare the results of the paper, as mentioned, a version is included where the necessary Tap Briges are added to be able to mimic real hosts. The scripts automatically generate the folder tree where the results are stored, and by keeping this structure, a representation of the results can be obtained like in the paper.
+
+Below are the scripts that have been used to prepare the results of the paper. The scripts automatically generate the folder tree where the results are stored, and by keeping this structure, a representation of the results can be obtained like in the paper. All results will be generated under the folder _./scripts/RESULTS_
 
 In addition, the files used for the simulation of each of the scenarios using Python3 are described below, all of them are collected in [scripts](./scripts/). 
-All of them include a ns-3 client and server, sending a 300 MB datafile with a rate of 40 Mbps, the tap-scenario too. 
+In all cases the evaluation embraces a pair ns-3 client and server sending a 300 MB datafile with a rate of 40 Mbpos, that equals the average capacity of the first link from the sender (access link). 
 
-### Simple model: LMS TOY
-This script deploys a Land - Mobile - System, with 5 s stay time in each state.
-- Use python script _sim_ns3_lms_toy.py_
-    -   Requires:
-        - lms_toy.json [Location: Scratch folder inside ns3-35 folder]
-    -   Interest Output:
-        - Outcome folder contains:
-            - logCWND.log: [time | size (MSS)]
-            - RXFile.log: [num pkt | time | size pkt (B)]
-            - TXFile.log: [num pkt | time | size pkt (B)]
-            - logBuffer.log: [time | size buffer (B)]
-            - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
-            - ChannelVar_stop.log: [time | State] where State = {Work=1,Stop}
-    - Mode of use: This script is able to run once the scenario, by excuting the _python3_ command. It creates a tree folder where the results are collected. You can customise this parameters, as well as the scenario described in the aforementioned JSON file. After running this script, you will get data files which are handled by the Jupyter notebook to show the performance.
-### LEO based scenarios: LMS 
-This script deploys a Land - Mobile - System, with exponentially distributed stay times.
-- Use python script _sim_ns3_lms.py_
-    -   Requires:
-        - lms.json [Location: Scratch folder inside ns3-35 folder]
-    -   Interest Output:
-        - Outcome folder:
-            - logCWND.log: [time | size (MSS)]
-            - RXFile.log: [num pkt | time | size pkt (B)]
-            - TXFile.log: [num pkt | time | size pkt (B)]
-            - logBuffer.log: [time | size buffer (B)]
-            - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
-    - Mode of use: This script is able to run once the scenario, by excuting the _python3_ command. It creates a tree folder where the results are collected. You can customise this parameters, as well as the scenario described in the aforementioned JSON file. After running this script, you will get data files which are handled by the Jupyter notebook to show the performance.
-           
-### LEO based scenarios: LMS - Background traffic - LMS
-This script deploys three links, UP/DOWN links are modeling a Land - Mobile - System and the ISL link presents background traffic. This last feature is swept.
-- Use python script _sim_ns3_sims_stop.py_
-    -   Requires:
-        - ConfigScenario_back_template.json [Location: Scratch folder inside ns3-35 folder]
-    -   Interest Output:
-        - Outcome folder - sweep configuration contains:
-            - SIM [#] folder:
-                - logCWND.log: [time | size (MSS)]
-                - RXFile.log: [num pkt | time | size pkt (B)]
-                - TXFile.log: [num pkt | time | size pkt (B)]
-                - logBuffer.log: [time | size buffer (B)]
-                - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
-    - Mode of use: This script is able to run the scenario, by excuting the _python3_ command. It creates a tree folder where the results are collected. You can customise this parameters, as well as the scenario described in the aforementioned JSON file. After running this script, you will get data files which are handled by the Jupyter notebook to show the performance. MonteCarlo simulations [Nsim] and sweep range of the background traffic can be adjusted. <br />
-    In order to mimic the paper outcomes - the setup values are:
-        - Nsim  = 100
-        - Background traffic = [ 5 to 30 ] Mbps with step = 1 Mbps. 
-               
+In all cases, the execution of a scenario generates the following logs: 
+- Congestion window: _logCWND.log_ [time (seconds) | size (B)]
+- Received traffic: _RXFile.log_ [pkt number | time (seconds) | pkt size (B)]
+- Transmission traffic: _TXFile.log_  [pkt number | time (seconds) | pkt size(B)]
+- Access buffer occupancy: _logBuffer.log_ [time (seconds) | size buffer (B)]
+- ChannelVar.log: [time (seconds)| State] where State = {LoS=1,Ms=2,Ds=3}
+- (Optional) ChannelVar_stop.log: [time (seconds)| State] where State = {Work=1,Stop}
 
-### LEO based scenarios: LMS - Interrupted Channel - LMS
-This script deploys three links, UP/DOWN links are modeling a Land - Mobile - System and the ISL link presents disconnections. This last feature is swept.
-- Use python script _sim_ns3_sims_background_traffic.py_
-    -   Requires:
-        - ConfigScenario_back_template.json [Location: Scratch folder inside ns3-35 folder]
-    -   Interest Output:
-        - Outcome folder - sweep configuration contains:
-            - SIM [#] folder:
-                - logCWND.log: [time | size (MSS)]
-                - RXFile.log: [num pkt | time | size pkt (B)]
-                - TXFile.log: [num pkt | time | size pkt (B)]
-                - logBuffer.log: [time | size buffer (B)]
-                - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
-    - Mode of use: This script is able to run the scenario, by excuting the _python3_ command. It creates a tree folder where the results are collected. You can customise this parameters, as well as the scenario described in the aforementioned JSON file. After running this script, you will get data files which are handled by the Jupyter notebook to show the performance. MonteCarlo simulations [Nsim] and sweep range of the stop mean time can be adjusted. <br />
-    In order to mimic the paper outcomes - the setup values are:
-        - Nsim  = 100
-        - Stop mean time = [0 to 3] s with step = 0.2 s. 
-              
+### Synthetic LMS link (figure 3)
+
+This script deploys a Land-Mobile-System (LMS) link modeled as a 3-state Markov Chain with constant stay times of 5 seconds. It runs the scenario once. 
+
+- Run python script [_sim_ns3_lms_toy.py_](./scripts/lms_toy.json)
+```
+cd scripts
+python3 sim_ns3_lms_toy.py
+```
+- The topology configuration is in file [./ns-allinone-3.35/ns-3.35/scratch/lms_toy.json](./ns-allinone-3.35/ns-3.35/scratch/lms_toy.json)
+- The output is saved in the folder [./scripts/RESULTS/Cubic_SyntheticLMS/](./scripts/RESULTS/Cubic_SyntheticLMS/).
+
+### Realistic LMS link (figure 4)
+
+This script deploys a Land-Mobile-System (LMS) link modeles as a 3-state Markov Chain with exponentially distributed stay times. It runs the scenario once.
+
+- Run python script [_sim_ns3_lms_toy.py_](./scripts/lms_toy.json)
+```
+cd scripts
+python3 sim_ns3_lms.py 
+```
+- The topology configuration is in file [./ns-allinone-3.35/ns-3.35/scratch/lms.json](./ns-allinone-3.35/ns-3.35/scratch/lms.json)
+- The output is saved in the folder [./scripts/RESULTS/Cubic_RealisticLMS/](./scripts/RESULTS/Cubic_RealisticLMS/).
+
+### End-to-end with disconnections traffic: LMS - ISL(disconnections)-LMS (figure 5)
+
+This script deploys three links, UP/DOWN LMS links and an inter-satellite-link (ISL) connecting them, with disconnections. The script sweeps the average disconnection time from 0 to 3 seconds with step 0.2 seconds. For each value it runs *Nsim* independent executions. By default *NSim* is set to 5, increase it to obtain statistically significant results.
+
+- Run python script [_sim_ns3_lms_toy.py_](./scripts/ConfigScenario_disconnect.json)
+```
+cd scripts
+python3 sim_ns3_lms.py 
+```
+- The topology configuration is in file [./ns-allinone-3.35/ns-3.35/scratch/ConfigScenario_stop.json](./ns-allinone-3.35/ns-3.35/scratch/ConfigScenario.json)
+- The output is saved in the folder [./scripts/RESULTS/endToEndDisconnect/](./scripts/RESULTS/endToEndDisconnect/) where one folder is created for each value of the background traffic, and simulation.  
+
+### End-to-end with background traffic: LMS - ISL(background traffic)-LMS (figure 6)
+
+This script deploys three links, UP/DOWN LMS links and an inter-satellite-link (ISL) connecting them, with background traffic. The script sweeps the background traffic from 5 to 30 Mbps with step 1 Mbps. For each value it runs *Nsim* independent executions. By default *NSim* is set to 5, increase it to obtain statistically significant results.
+
+- Run python script [_sim_ns3_lms_toy.py_](./scripts/lms_toy.json)
+```
+cd scripts
+python3 sim_ns3_lms.py 
+```
+- The topology configuration is in file [./ns-allinone-3.35/ns-3.35/scratch/ConfigScenario.json](./ns-allinone-3.35/ns-3.35/scratch/ConfigScenario.json)
+- The output is saved in the folder [./scripts/RESULTS/endToEndBackground/](./scripts/RESULTS/endToEndBackground/) where one folder is created for each value of the background traffic, and simulation.  
+
 ### Applications with ns-3 TAP
-This script is able to deploy any scenario and assign real host in each network end.
-- Use python script _sim_ns3_taps.py_
-    -   Requires:
-        - lms_toy.json [Location: Scratch folder inside ns3-35 folder]
-    -   Interest Output:
-        - Outcome folder contains:
-            - logCWND.log: [time | size (MSS)]
-            - RXFile.log: [num pkt | time | size pkt (B)]
-            - TXFile.log: [num pkt | time | size pkt (B)]
-            - logBuffer.log: [time | size buffer (B)]
-            - ChannelVar.log: [time | State] where State = {LoS=1,Ms,Ds}
-
-### Extras: Running with real hosts
-- _tunctl_, _ip_ (should be there, just in case of using real hosts). You need to install the following packages for easy bridge management.
+This script runs the scenario using ns-3 TAP to use real applications instead of ns-3 client/server.
+The script uses the commands _tunctl_ and _ip_. Install them as follows
 ```
 apt install uml-utilities
 apt install iproute2
 ```
 
-## Usage
-To run a network topology the _<--name-->.py_ file, where _name_ changes according the details explained above.
-```shell
-python3 <--name-->.py
-```
-
 ## Jupyter NoteBook
-[Analysis.ipynb](./scripts/Analysis.ipynb) contains code snippets to reproduce the results shown in the paper. According to the folder tree created by running the scripts, this notebook is able to show the performance of the results obtained. It also includes several figures as examples of what can be obtained by running the code sections. The code snippets are organised according to the scenarios simulated.
-In folder [figures](./figures/), there are three figures which show the performance of the third setup, LMS - Background traffic - LMS, , asn an example of what you can obtain running the code sections including in the Jupyter notebook.
+[Analysis.ipynb](./scripts/Analysis.ipynb) contains code snippets to reproduce the results shown in the paper. Figures generated by [Analysis.ipynb](./scripts/Analysis.ipynb) are saved in [figures](./figures/) folder. 
+
+__Disclaimer__: figures in manuscrip are generated with Tikz, points in temporal plots are reduced for better visibility and boxplots are generated with 100 executions.
 
 ## Contact 
 

@@ -45,7 +45,6 @@ In all cases, the execution of a scenario generates the following logs:
 - Transmission traffic: _TXFile.log_  [pkt number | time (seconds) | pkt size(B)]
 - Access buffer occupancy: _logBuffer.log_ [time (seconds) | size buffer (B)]
 - ChannelVar.log: [time (seconds)| State] where State = {LoS=1,Ms=2,Ds=3}
-- (Optional) ChannelVar_stop.log: [time (seconds)| State] where State = {Work=1,Stop}
 
 ### Synthetic LMS link (figure 3)
 

@@ -42,7 +42,7 @@ void CreateMiddleLinks(PointToPointHelper pointToPoint, vector<NetDeviceContaine
     pointToPoint.SetDeviceAttribute("Mtu", UintegerValue(data.at("Links")[i]["MTU"]));
     // pointToPoint.SetQueue("ns3::DropTailQueue", "MaxSize", StringValue(to_string(data.at("Links")[i]["DropTailQueue"]) + "p")); // FIXME: 1000000000000p, 15p, 7p
     pointToPoint.SetQueue("ns3::DropTailQueue", "MaxSize", ns3::QueueSizeValue(QueueSize(QueueSizeUnit::BYTES, (data.at("Links")[i]["DropTailQueue"]))));
-    pointToPoint.SetDeviceAttribute("Mode", StringValue(data.at("Links")[i]["Mode"]));
+    // pointToPoint.SetDeviceAttribute("Mode", StringValue(data.at("Links")[i]["Mode"]));
 
     NetDeviceContainer p2pDev = pointToPoint.Install(NodeContainer{nodes.Get(i + 1), nodes.Get(i + 2)});
     Devs.push_back(p2pDev);
